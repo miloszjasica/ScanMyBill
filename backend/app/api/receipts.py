@@ -1,3 +1,4 @@
+import uuid
 from fastapi import APIRouter, UploadFile, File
 from pydantic import BaseModel
 
@@ -19,8 +20,10 @@ async def scan_receipt(file: UploadFile = File(...)):
 
     result = await run_pipeline(image_bytes)
 
+    receipt_id = str(uuid.uuid4())
+
     return {
-        "receipt_id": None,
+        "receipt_id": receipt_id,
         "data": result
     }
 

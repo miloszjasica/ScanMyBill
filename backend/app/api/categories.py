@@ -24,10 +24,11 @@ async def create_category(data: CategoryCreate):
         return category
     
 
-    
+
 class KeywordCreate(BaseModel):
     category_id: int
     keyword: str
+    label: str | None = None
 
 
 @router.post("/keyword")
@@ -36,7 +37,8 @@ async def add_keyword(data: KeywordCreate):
 
         kw = CategoryKeyword(
             category_id=data.category_id,
-            keyword=data.keyword.lower()
+            keyword=data.keyword.lower(),
+            label=data.label or data.keyword.capitalize()
         )
 
         db.add(kw)
