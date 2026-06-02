@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+asyncpg
+alembic
+python-dotenv
+pydantic-settings
+python-jose
+passlib[bcrypt]
+pillow
+pytesseract
+python-multipart
+requests
+paddleocr==2.7.0.3
+paddlepaddle==2.6.2
+opencv-python-headless
+numpy

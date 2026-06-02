@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual env
+venv/
+.env
+.env.*
+
+# FastAPI / logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Docker volumes / data
+pgdata/
+ollama_data/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# migrations cache
+alembic/versions/__pycache__/
+
+# Node (jeśli kiedyś frontend)
+node_modules/

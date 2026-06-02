@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: scanmybill_db
+    restart: always
+    environment:
+      POSTGRES_USER: scanmybill
+      POSTGRES_PASSWORD: scanmybill
+      POSTGRES_DB: scanmybill
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: scanmybill_api
+    restart: always
+    depends_on:
+      - db
+      - ollama
+    environment:
+      DATABASE_URL: postgresql+asyncpg://scanmybill:scanmybill@db:5432/scanmybill
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: scanmybill_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: always
+
+volumes:
+  pgdata:
+  ollama_data:
